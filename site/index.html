@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>מפרויקט לניסיון</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+<style>
+/* layout: graph-paper engineering notebook; the interviewer's red pen annotates the resume line */
+:root{
+  --paper:#f3f5f1; --grid:#dfe5dc; --ink:#18212e; --muted:#5b6573;
+  --pen:#c8243c; --pass:#0e7a58; --card:#ffffff; --line:#cdd5ca;
+  --display:"Secular One","Assistant",Arial,sans-serif;
+  --body:"Assistant","Arial Hebrew",Arial,sans-serif;
+  --hand:"Amatic SC","Assistant",cursive;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#12171f; --grid:#1d2530; --ink:#e8ecf1; --muted:#9aa5b3; --pen:#ff6b81; --pass:#3fd0a0; --card:#19202b; --line:#2b3542; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#12171f; --grid:#1d2530; --ink:#e8ecf1; --muted:#9aa5b3; --pen:#ff6b81; --pass:#3fd0a0; --card:#19202b; --line:#2b3542; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;
+  color:var(--ink);font:18px/1.6 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font-family:var(--display);font-size:20px}
+.brand small{font-family:var(--body);color:var(--muted);font-size:14px;margin-inline-start:8px}
+a.cta,button.cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:0;border-radius:10px;padding:14px 22px;
+  font:700 18px var(--body);text-decoration:none;cursor:pointer}
+a.cta:focus-visible,button.cta:focus-visible,a:focus-visible{outline:3px solid var(--pen);outline-offset:3px}
+a.cta.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding:28px 0 48px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,5.4vw,58px);line-height:1.08;margin:0 0 16px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--pen)}
+.lede{font-size:20px;color:var(--muted);max-width:34em;margin:0 0 24px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.fine{font-size:14px;color:var(--muted);margin-top:10px}
+/* the sheet */
+.sheet{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px 22px 26px;box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
+.sheet .tag{position:absolute;top:-12px;inset-inline-start:16px;background:var(--ink);color:var(--paper);font-size:13px;padding:2px 10px;border-radius:20px}
+.label{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.02em}
+.before{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--pen);margin:4px 0 14px}
+.after{font-weight:600;margin:4px 0 0;position:relative}
+.after mark{background:linear-gradient(transparent 60%,rgba(200,36,60,.18) 60%);color:inherit}
+.note{font-family:var(--hand);color:var(--pen);font-size:30px;line-height:1.05;margin:14px 0 4px;transform:rotate(-1.5deg)}
+.answer{border-inline-start:3px solid var(--pass);padding-inline-start:12px;font-size:16px}
+.src{font-size:13px;color:var(--muted);margin-top:12px}
+bdi{unicode-bidi:isolate}
+section{padding:44px 0}
+h2{font-family:var(--display);font-weight:400;font-size:32px;margin:0 0 20px;text-wrap:balance}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px}
+.step b{display:block;font-family:var(--display);font-weight:400;font-size:20px;margin-bottom:6px}
+.step b::before{counter-increment:s;content:counter(s) ". ";color:var(--pen)}
+.step p{margin:0;color:var(--muted);font-size:16px}
+.gets{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;padding:0;margin:0;list-style:none}
+.gets li{padding-inline-start:26px;position:relative}
+.gets li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--pass);font-weight:700}
+.rules{background:var(--ink);color:var(--paper);border-radius:6px;padding:26px}
+.rules h2{color:var(--paper)}
+.rules ul{margin:0;padding-inline-start:20px;display:grid;gap:8px}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.plan.main{border:2px solid var(--pen)}
+.plan .amt{font-family:var(--display);font-size:44px;line-height:1}
+.plan .amt span{font-family:var(--body);font-size:16px;color:var(--muted)}
+.plan ul{margin:0;padding-inline-start:20px;color:var(--muted);font-size:16px}
+.plan .cta{margin-top:auto;justify-content:center}
+details{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--muted);font-size:16px}
+footer{padding:30px 0 50px;color:var(--muted);font-size:14px}
+@media (max-width:760px){
+  body{font-size:17px}
+  .hero{grid-template-columns:1fr;gap:28px;padding-top:8px}
+  .steps,.price,.gets{grid-template-columns:1fr}
+  header.top .cta{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .note{animation:write .9s .4s ease-out both}
+  @keyframes write{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">מפרויקט לניסיון <small>CV Studio</small></div>
+    <a class="cta" href="mailto:asafa3@gmail.com?subject=CV%20Studio%20pilot">לבירור זמינות</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>מהפרויקט שלך <em>לשורות ברורות</em> בקורות החיים.</h1>
+      <p class="lede">שירות בהכנה: ניסוח התרומה שלך בפרויקט בעברית ובאנגלית, והכנה לשאלות ראיון על העבודה שביצעת. מתחילים בבירור זמינות, בלי לשלוח מסמכים.</p>
+      <div class="actions">
+        <a class="cta" href="mailto:asafa3@gmail.com?subject=CV%20Studio%20pilot">בירור זמינות לפיילוט</a>
+        <a class="cta ghost" href="#how">איך זה עובד</a>
+      </div>
+      <p class="fine">הפיילוט ידני וכפוף לזמינות. מדריך בסיסי חינמי לסוכן אישי זמין בהמשך העמוד.</p>
+    </div>
+
+    <div class="sheet" aria-label="דוגמה לשורה בקורות החיים">
+      <span class="tag">דוגמה</span>
+      <div class="label">לפני</div>
+      <p class="before">פרויקט גמר: מערכת חיישנים</p>
+      <div class="label">אחרי</div>
+      <p class="after">במסגרת צוות הפרויקט, פיתחתי רכיב לאיסוף נתוני חיישנים ובדקתי את שמירת הנתונים לקובץ.</p>
+      <p class="note">המראיין: מה היה החלק שלך?</p>
+      <p class="answer">כתבתי את רכיב האיסוף ובדקתי את הקובץ שנוצר. שאר רכיבי המערכת פותחו על ידי חברי הצוות.</p>
+      <p class="src">דוגמה מומצאת להמחשת הניסוח בלבד; אינה תוצאת לקוח או הוכחת ביצועים.</p>
+    </div>
+  </div>
+
+  <section id="how">
+    <h2>איך זה עובד</h2>
+    <div class="steps">
+      <div class="step"><b>שולחים</b><p>פנייה ראשונית ללא קבצים. אחרי אישור זמינות ותיאום תנאי הטיפול במידע, מתארים פרויקט ואת החלק שלך בצוות.</p></div>
+      <div class="step"><b>אנחנו בונים</b><p>שורות שמתאימות למשרה, כל אחת עם מקור בקבצים שלך. פרט שחסר חוזר אליך כשאלה לאישור.</p></div>
+      <div class="step"><b>מתכוננים</b><p>מקבלים קורות חיים ב-<bdi>PDF</bdi> בעברית ובאנגלית ודף הכנה לראיון: מה ישאלו על כל שורה ומה עונים.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>מה מתוכנן בשירות</h2>
+    <ul class="gets">
+      <li>3 עד 5 שורות חזקות לכל פרויקט, בעברית ובאנגלית</li>
+      <li>דף הכנה לראיון לכל שורה</li>
+      <li>קורות חיים בפורמט פשוט; אין הבטחה למעבר סינון או לקבלה לעבודה</li>
+      <li>בדיקה שקורות החיים וה-<bdi>LinkedIn</bdi> מספרים אותו סיפור</li>
+      <li>התאמה למשרה ספציפית ששלחת</li>
+      <li>מתאים גם לסמינר, האקתון, התמחות או תפקיד בצבא</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="rules">
+      <h2>הכללים שלנו</h2>
+      <ul>
+        <li>לא ממציאים. כל שורה נבדקת מול הקבצים ששלחת, ומה שלא כתוב שם לא נכנס.</li>
+        <li>עבודת צוות נשארת עבודת צוות. כותבים במדויק מה היה החלק שלך.</li>
+        <li>אין לשלוח פרטים מסווגים או מידע סודי של מעסיקים. משתמשים רק בתיאור שמותר לך לשתף.</li>
+        <li>לפני קבלת קבצים יימסרו תנאי הטיפול במידע, ספקי העיבוד ומשך השמירה. אין באתר העלאת קבצים.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="price">
+    <h2>מחיר</h2>
+    <div class="price">
+      <div class="plan main">
+        <div class="label">שימוש עצמי בסוכן שלך</div>
+        <div class="amt">0 ₪ <span>עבור המדריך</span></div>
+        <ul><li>מדריך בסיסי לתיאור פרויקט אחד</li><li>שימוש בחשבון ה-AI שלך, לפי תנאי הספק</li><li>בדיקה ואישור של הנוסח באחריותך</li></ul>
+        <a class="cta" href="https://github.com/asafa3-cmyk/cv-studio-public/blob/main/PROMPT.md">פתיחת המדריך החינמי</a>
+      </div>
+      <div class="plan">
+        <div class="label">חבילת חיפוש עבודה</div>
+        <div class="amt">149 ₪ <span>מחיר מוצע לניסוי, בתשלום אחד</span></div>
+        <ul><li>עברית ואנגלית והכנה לשאלות ראיון</li><li>היקף העבודה והמחיר יאושרו לפני הזמנה</li><li>השירות בהכנה; אין כאן גבייה או הזמנה</li></ul>
+        <a class="cta ghost" href="mailto:asafa3@gmail.com?subject=CV%20Studio%20service">בירור על השירות</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>שאלות</h2>
+    <details><summary>זה כתוב על ידי AI?</summary><p>השירות המתוכנן משלב AI ובדיקה אנושית מול החומרים והאישור שלך. אין אימות חיצוני של ניסיון, תארים או מעסיקים.</p></details>
+    <details><summary>אני לא מהנדס. זה מתאים לי?</summary><p>כן. כל פרויקט שיש עליו מסמך מתאים: סמינר בפסיכולוגיה, עבודה בכלכלה, פרויקט בסיעוד, התמחות או תפקיד בצבא.</p></details>
+    <details><summary>מה אם אין לי מספרים או תוצאות?</summary><p>נשאל אותך עד 5 שאלות קצרות. אם אין מספר, כותבים היקף ותוצאה במילים, בלי להמציא.</p></details>
+    <details><summary>מה עם הפרטיות שלי?</summary><p>העמוד הזה אינו מקבל קבצים ואינו מציע חשבון. פנייה בדוא״ל מטופלת אצל ספק הדואר. אין לשלוח קורות חיים בפנייה הראשונית; תנאי עיבוד ושמירה יימסרו לפני מסירת חומרים. העמוד טוען גופנים מ-Google Fonts.</p></details>
+  </section>
+
+  <footer>מפרויקט לניסיון · CV Studio · © 2026 אסף אסנין</footer>
+</div>
+
+</body>
+</html>
